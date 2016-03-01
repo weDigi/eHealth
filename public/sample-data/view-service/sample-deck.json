@@ -1,0 +1,26 @@
+{
+  "id": "VyqxMoKsl",
+  "title": "Overview",
+  "slug": "px-deck",
+  "cardOrder": null,
+  "createTimeStamp": "2016-02-26T20:17:29.625Z",
+  "tags": [{
+    "id": "N1gWMstig",
+    "value": "parent"
+  }],
+  "cards": [{
+    "id": "E1ilfsKjx",
+    "title": "widgets card",
+    "slug": "widgets-card",
+    "attributes": {},
+    "createTimeStamp": "2016-02-26T20:17:30.917Z",
+    "tags": []
+  }, {
+    "id": "V16gfiKig",
+    "title": "Gist Card",
+    "slug": "gist-card",
+    "attributes": {},
+    "createTimeStamp": "2016-02-26T20:17:32.864Z",
+    "tags": []
+  }]
+}
