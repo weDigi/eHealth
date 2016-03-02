@@ -11,7 +11,7 @@ define(['angular', './sample-module'], function(angular, module) {
       getDecksByTags: function(tags) {
         var deferred = $q.defer();
         // $http.get(this.baseUrl + '/decks/tags?values=' + tags + '&filter[order]=createTimeStamp ASC')
-        $http.get('/sample-data/view-service/sample-decks.json')
+        $http.get(this.baseUrl + '/sample-decks.json')
           .then(function(res) {
             deferred.resolve(res.data);
           }, function() {
