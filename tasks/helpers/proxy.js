@@ -8,7 +8,9 @@ var serviceProxy = {
     var middlewares = [];
     var routes = Object.keys(proxyConfig);
     var secureProxyRoutes = {};
-    //get access token here
+
+    // get access token here
+    // unshift to add to front of all middlwares
     middlewares.unshift(function (req, res, next) {
       var urlFound = false;
       var i = 0;
@@ -36,8 +38,9 @@ var serviceProxy = {
       }
     });
 
-    for (var routeIndex = 0; routeIndex < routes.length; routeIndex++){
-      secureProxyRoutes[routes[routeIndex]] = proxyConfig[routes[routeIndex]].url;
+    for (var routeIndex = 0; routeIndex < routes.length; routeIndex++) {
+      secureProxyRoutes[routes[routeIndex]] =
+        proxyConfig[routes[routeIndex]].url;
     }
 
     var config = {
@@ -48,11 +51,10 @@ var serviceProxy = {
 
     middlewares.push(require('json-proxy').initialize(config));
 
-
     return middlewares;
+
   }
 };
 
 
 module.exports = serviceProxy;
-

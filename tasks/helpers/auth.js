@@ -57,6 +57,7 @@ module.exports = {
       }
     });
   },
+
   getMiddlewares: function () {
     //get access token here
     var middlewares = [];
@@ -71,6 +72,10 @@ module.exports = {
           from: '^/logout',
           to: uaa.serverUrl + '/logout?redirect=http://localhost:9000',
           redirect: 'permanent'
+        },
+        {
+          from: '^/fake-uaa(.*)$',
+          to: '/fake-uaa.html'
         },
         {
           from: '^[^\.|]+$',   //catch all client side routes
@@ -95,7 +100,10 @@ module.exports = {
         });
       } else if (req.url.match('/userinfo')) {
         if (uaa.hasValidSession()) {
-          res.end(JSON.stringify({email: uaa.user.email, user_name: uaa.user.user_name}));
+          res.end(JSON.stringify({
+            email: uaa.user.email,
+            user_name: uaa.user.user_name
+          }));
         } else {
           next(401);
         }

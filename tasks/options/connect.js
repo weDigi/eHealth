@@ -5,15 +5,27 @@ var config = {
   /**
    * --------- ADD YOUR UAA CONFIGURATION HERE ---------
    *
-   * This uaa helper object simulates NGINX uaa integration using Grunt allowing secure cloudfoundry service integration in local development without deploying your application to cloudfoundry.
+   * This uaa helper object simulates NGINX uaa integration using Grunt allowing
+   * secure cloudfoundry service integration in local development without
+   * deploying your application to cloudfoundry.
    * Please update the following uaa configuration for your solution
    */
+  /*
   uaa: {
     clientId: 'predix-seed',
     serverUrl: 'https://etc.predix-uaa-staging.grc-apps.svc.ice.ge.com',
     defaultClientRoute: '/about',
     base64ClientCredential: 'cHJlZGl4LXNlZWQ6TTBhVzdrTmZRRndyTTZ3ZHJpV2h3bVc2ck1HQ045Q0x1cnI5VnI3elc0cz0='
   },
+  */
+
+  uaa: {
+    clientId: 'predix-seed',
+    serverUrl: '/fake-uaa',
+    defaultClientRoute: '/about',
+    base64ClientCredential: 'abc'
+  },
+
   /**
    * --------- ADD YOUR SECURE ROUTES HERE ------------
    *
@@ -37,19 +49,22 @@ module.exports = {
       open: true,
       hostname: 'localhost',
       middleware: function (connect, options) {
+
         var middlewares = [];
 
         //add predix services proxy middlewares
         middlewares = middlewares.concat(proxy.init(config.proxy));
 
-        //add predix uaa authentication middlewaress
+        //add predix uaa authentication middlewares
         middlewares = middlewares.concat(auth.init(config.uaa));
 
         if (!Array.isArray(options.base)) {
           options.base = [options.base];
         }
 
-        var directory = options.directory || options.base[options.base.length - 1];
+        var directory =
+          options.directory || options.base[options.base.length - 1];
+
         options.base.forEach(function (base) {
           // Serve static files.
           middlewares.push(connect.static(base));
@@ -58,6 +73,7 @@ module.exports = {
         // Make directory browse-able.
         middlewares.push(connect.directory(directory));
 
+        console.log(middlewares);
         return middlewares;
       }
     }
