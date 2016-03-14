@@ -8,11 +8,19 @@ var config = {
    * This uaa helper object simulates NGINX uaa integration using Grunt allowing secure cloudfoundry service integration in local development without deploying your application to cloudfoundry.
    * Please update the following uaa configuration for your solution
    */
+  /**
   uaa: {
     clientId: 'predix-seed',
     serverUrl: 'https://etc.predix-uaa-staging.grc-apps.svc.ice.ge.com',
     defaultClientRoute: '/about',
     base64ClientCredential: 'cHJlZGl4LXNlZWQ6TTBhVzdrTmZRRndyTTZ3ZHJpV2h3bVc2ck1HQ045Q0x1cnI5VnI3elc0cz0='
+  },
+  */
+  uaa: {
+    clientId: 'predix-seed',
+    serverUrl: '/fake-uaa',
+    defaultClientRoute: '/about',
+    base64ClientCredential: 'abcdefghijklmnopqrstuvwxyz'
   },
   /**
    * --------- ADD YOUR SECURE ROUTES HERE ------------

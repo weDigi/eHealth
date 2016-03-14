@@ -63,6 +63,10 @@ module.exports = {
     var uaa = this;
     var rewriteMiddleware = rewriteModule.getMiddleware([
         {
+          from: '^/fake-uaa(.*)$',
+          to: '/fake-uaa.html'
+        },
+        {
           from: '^/login(.*)$',
           to: uaa.serverUrl + '/oauth/authorize$1&response_type=code&scope=&client_id=' + uaa.clientId + '&redirect_uri=http%3A%2F%2Flocalhost%3A9000%2Fcallback',
           redirect: 'permanent'
