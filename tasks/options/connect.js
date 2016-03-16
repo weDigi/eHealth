@@ -20,7 +20,7 @@ var config = {
   /**
    * --- FAKE-UAA ---
    * The following configuration is for local development and demo only:
-  */
+   */
   uaa: {
     clientId: 'predix-seed',
     serverUrl: '/fake-uaa',
@@ -34,10 +34,19 @@ var config = {
    *
    * Note: Keep the /api in front of your services here to tell the proxy to add authorization headers.
    */
+  /*
+   proxy: {
+     '/api/view-service(.*)': {
+       url: 'http://localhost:3000/v1$1',
+       instanceId: 'predix-seed'
+     }
+   }
+  */
+  /* This proxy is used by static seed to reference data in /public/sample-data/view-service */
   proxy: {
     '/api/view-service(.*)': {
-      url: 'http://predix-views-dev.grc-apps.svc.ice.ge.com/v1$1',
-      instanceId: '49a92fd6-df7b-45f6-925e-0bca94be7313'
+      url: 'http://localhost:9000/fake-view-service$1',
+      instanceId: 'predix-seed'
     }
   }
 };
@@ -49,7 +58,7 @@ module.exports = {
       base: 'public',
       open: true,
       hostname: 'localhost',
-      middleware: function (connect, options) {
+      middleware: function(connect, options) {
         var middlewares = [];
 
         //add predix services proxy middlewares
@@ -63,7 +72,7 @@ module.exports = {
         }
 
         var directory = options.directory || options.base[options.base.length - 1];
-        options.base.forEach(function (base) {
+        options.base.forEach(function(base) {
           // Serve static files.
           middlewares.push(connect.static(base));
         });

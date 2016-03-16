@@ -1,21 +1,20 @@
 var auth = require('./auth');
+var fs = require('fs');
 
 var serviceProxy = {
-  init: function (proxyConfig) {
+  init: function(proxyConfig) {
     return this.getMiddlewareRoutes(proxyConfig);
   },
-  getMiddlewareRoutes : function(proxyConfig){
+  getMiddlewareRoutes: function(proxyConfig) {
     var middlewares = [];
     var routes = Object.keys(proxyConfig);
     var secureProxyRoutes = {};
     //get access token here
-    middlewares.unshift(function (req, res, next) {
+    middlewares.unshift(function(req, res, next) {
       var urlFound = false;
       var i = 0;
       if (req.url.match('/api')) {
-
         console.log('proxy url', req.url);
-
         var urlFound = false;
         var i = 0;
         while (!urlFound) {
@@ -36,8 +35,37 @@ var serviceProxy = {
       }
     });
 
-    for (var routeIndex = 0; routeIndex < routes.length; routeIndex++){
-      secureProxyRoutes[routes[routeIndex]] = proxyConfig[routes[routeIndex]].url;
+    // fake view service
+    middlewares.unshift(function(req, res, next) {
+      if (req.url.match('/fake-view-service')) {
+        // convert urls to filenames by replacing special characters with -
+        // input:
+        // 'decks/tags?values=parent&filter[order]=createTimeStamp%20ASC'
+        // output:
+        // 'sample-data/view-service/decks/tags-values=parent-filter-order--createTimeStamp-20ASC.json'
+        console.log('FAKE VIEW SERVICE', req.url);
+        var regex = /[^A-Za-z-\/0-9]+/g;
+        var newUrl = 'public' + req.url
+          .replace(regex, '-')
+          .replace(/fake-view-service/, 'sample-data/view-service')
+          .toLowerCase()
+          .concat('.json');
+        console.log('New URL: ', newUrl);
+        fs.readFile(newUrl, 'utf8', function(err, data) {
+          if (err) {
+            return console.log(err);
+          }
+          console.log(data.toString());
+          res.end(data.toString(), 'utf8');
+        });
+      } else {
+        next();
+      }
+    });
+
+    for (var routeIndex = 0; routeIndex < routes.length; routeIndex++) {
+      secureProxyRoutes[routes[routeIndex]] = proxyConfig[routes[routeIndex]]
+        .url;
     }
 
     var config = {
@@ -46,8 +74,8 @@ var serviceProxy = {
       }
     };
 
-    middlewares.push(require('json-proxy').initialize(config));
-
+    middlewares.push(require('json-proxy')
+      .initialize(config));
 
     return middlewares;
   }
@@ -55,4 +83,3 @@ var serviceProxy = {
 
 
 module.exports = serviceProxy;
-

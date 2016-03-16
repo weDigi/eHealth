@@ -1,0 +1,19 @@
+{
+  "id": "VksGY6w_e",
+  "title": "Detail",
+  "slug": "px-deck",
+  "cardOrder": null,
+  "createTimeStamp": "2016-01-20T00:51:06.783Z",
+  "tags": [{
+    "id": "EyYRq6v_e",
+    "value": "parent"
+  }],
+  "cards": [{
+    "id": "NJILK6vOl",
+    "title": "datagrid card",
+    "slug": "datagrid-card",
+    "attributes": {},
+    "createTimeStamp": "2016-01-20T00:52:05.901Z",
+    "tags": []
+  }]
+}
