@@ -63,6 +63,10 @@ module.exports = {
     var uaa = this;
     var rewriteMiddleware = rewriteModule.getMiddleware([
         {
+          from: '^/fake-userinfo.json$',
+          to: '/fake-userinfo.json'
+        },
+        {
           from: '^/fake-uaa(.*)$',
           to: '/fake-uaa.html'
         },
@@ -86,6 +90,12 @@ module.exports = {
     middlewares.push(function (req, res, next) {
       if (req.url.match('/callback')) {
         var params = url.parse(req.url, true).query;
+        params.state = params.state || '/about';
+        var newUrl = req._parsedUrl.pathname.replace("/callback", params.state);
+        res.statusCode = 301;
+        res.setHeader('Location', url);
+        res.end();
+        /*
         uaa.getAccessTokenFromCode(params.code, function (token) {
           console.log('uaa access token: ', token);
           params.state = params.state || '/about';
@@ -97,6 +107,7 @@ module.exports = {
           console.error('error getting access token: ', err);
           next(err);
         });
+        */
       } else if (req.url.match('/userinfo')) {
         if (uaa.hasValidSession()) {
           res.end(JSON.stringify({email: uaa.user.email, user_name: uaa.user.user_name}));

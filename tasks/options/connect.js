@@ -5,8 +5,9 @@ var config = {
   /**
    * --------- ADD YOUR UAA CONFIGURATION HERE ---------
    *
-   * This uaa helper object simulates NGINX uaa integration using Grunt allowing secure cloudfoundry service integration in local development without deploying your application to cloudfoundry.
-   * Please update the following uaa configuration for your solution
+   * This uaa helper object simulates NGINX uaa integration using Grunt allowing
+   * secure cloudfoundry service integration in local development without deploying your application to cloudfoundry.
+   * Please update the following uaa configuration for your solution:
    */
   /**
   uaa: {
@@ -15,6 +16,10 @@ var config = {
     defaultClientRoute: '/about',
     base64ClientCredential: 'cHJlZGl4LXNlZWQ6TTBhVzdrTmZRRndyTTZ3ZHJpV2h3bVc2ck1HQ045Q0x1cnI5VnI3elc0cz0='
   },
+  */
+  /**
+   * --- FAKE-UAA ---
+   * The following configuration is for local development and demo only:
   */
   uaa: {
     clientId: 'predix-seed',

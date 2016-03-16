@@ -1,1 +1,60 @@
 <h1>Fake UAA</h1>
+
+<script>
+
+  // pass in variable key, returns value
+  function getQueryVariable(variable) {
+    var query = window.location.search.substring(1);
+    var vars = query.split("&");
+    for (var i=0;i<vars.length;i++) {
+      var pair = vars[i].split("=");
+      if(pair[0] == variable){return pair[1];}
+    }
+    return(false);
+  };
+
+  // extract querystring varaibles
+  var url = decodeURIComponent(getQueryVariable('redirect_uri'));
+  var state = decodeURIComponent(getQueryVariable('state'));
+  var response_type = decodeURIComponent(getQueryVariable('response_type'));
+  var scope = decodeURIComponent(getQueryVariable('scope'));
+  var client_id = decodeURIComponent(getQueryVariable('client_id'));
+  var redirect = decodeURIComponent(getQueryVariable('redirect'));
+
+  // write to document
+  var p = document.createElement('p');
+  var textElement = p.innerHTML = 'url: "' + url + '"<br/>' +
+    'state: "' + state + '"<br/>' +
+    'response_type: "' + response_type + '"<br/>' +
+    'scope: "' + scope + '"<br/>' +
+    'client_id: "' + client_id + '"<br/>' +
+    'redirect: ' + redirect;
+  // p.appendChild(textElement);
+
+  document.body.appendChild(p);
+
+  // may come in as 'url' or 'redirect'
+  var forwardUrl = null;
+  if (url && url != 'false') {
+    forwardUrl = url;
+  } else if (redirect && redirect != 'false') {
+    forwardUrl = redirect;
+  }
+
+  // forward on to url from querystring
+  if(forwardUrl) {
+    var times = 3;
+    var br = document.createElement('br');
+    p.appendChild(br);
+    var timesElement = document.createElement('p');
+    document.body.appendChild(timesElement);
+    setInterval(function() {
+      if(times < 1) {
+        window.location = forwardUrl;
+      }
+      timesElement.innerHTML = 'Redirect in: ' + times;
+      times--;
+    }, 1000);
+  }
+
+</script>
