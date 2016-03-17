@@ -9,19 +9,19 @@ var serviceProxy = {
     var middlewares = [];
     var routes = Object.keys(proxyConfig);
     var secureProxyRoutes = {};
-    //get access token here
+    // get access token here
     middlewares.unshift(function(req, res, next) {
       var urlFound = false;
       var i = 0;
       if (req.url.match('/api')) {
-        console.log('proxy url', req.url);
+        // console.log('proxy url', req.url);
         var urlFound = false;
         var i = 0;
         while (!urlFound) {
           if (req.url.match(routes[i])) {
             req.headers['authorization'] = auth.accessToken;
             req.headers['predix-zone-id'] = proxyConfig[routes[i]].instanceId;
-            console.log('proxy headers', req.headers);
+            // console.log('proxy headers', req.headers);
             urlFound = true;
           }
           i++;
@@ -43,19 +43,16 @@ var serviceProxy = {
         // 'decks/tags?values=parent&filter[order]=createTimeStamp%20ASC'
         // output:
         // 'sample-data/view-service/decks/tags-values=parent-filter-order--createTimeStamp-20ASC.json'
-        console.log('FAKE VIEW SERVICE', req.url);
         var regex = /[^A-Za-z-\/0-9]+/g;
         var newUrl = 'public' + req.url
           .replace(regex, '-')
           .replace(/fake-view-service/, 'sample-data/view-service')
           .toLowerCase()
           .concat('.json');
-        console.log('New URL: ', newUrl);
         fs.readFile(newUrl, 'utf8', function(err, data) {
           if (err) {
             return console.log(err);
           }
-          console.log(data.toString());
           res.end(data.toString(), 'utf8');
         });
       } else {

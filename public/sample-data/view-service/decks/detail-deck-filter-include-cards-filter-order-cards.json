@@ -1,14 +1,17 @@
 {
-  "id": "EJNmYaP_e",
-  "title": "Time Series Deck",
+  "id": "detail-deck",
+  "title": "Detail",
   "slug": "px-deck",
   "cardOrder": null,
   "createTimeStamp": "2016-01-20T00:51:06.783Z",
-  "tags": [],
+  "tags": [{
+    "id": "EyYRq6v_e",
+    "value": "parent"
+  }],
   "cards": [{
-    "id": "NyEttTwOl",
-    "title": "time series card",
-    "slug": "time-series-card",
+    "id": "datagrid-card",
+    "title": "datagrid card",
+    "slug": "datagrid-card",
     "attributes": {},
     "createTimeStamp": "2016-01-20T00:52:05.901Z",
     "tags": []

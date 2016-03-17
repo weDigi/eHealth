@@ -1,5 +1,5 @@
 [{
-  "id": "VksGY6w_e",
+  "id": "detail-deck",
   "title": "Detail",
   "slug": "px-deck",
   "cardOrder": null,
@@ -9,13 +9,23 @@
     "value": "parent"
   }]
 }, {
-  "id": "EJNmYaP_e",
+  "id": "datagrid-deck",
   "title": "Datagrid View",
   "slug": "px-deck",
   "cardOrder": null,
   "createTimeStamp": "2016-01-20T00:51:15.902Z",
   "tags": [{
     "id": "Eyg39aPOl",
+    "value": "parent"
+  }]
+}, {
+  "id": "other-deck",
+  "title": "Other View",
+  "slug": "px-deck",
+  "cardOrder": null,
+  "createTimeStamp": "2016-01-20T00:51:15.902Z",
+  "tags": [{
+    "id": "asdf",
     "value": "parent"
   }]
 }]

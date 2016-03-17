@@ -1,0 +1,16 @@
+{
+  "id": "time-series-deck",
+  "title": "Time Series Deck",
+  "slug": "px-deck",
+  "cardOrder": null,
+  "createTimeStamp": "2016-01-20T00:51:06.783Z",
+  "tags": [],
+  "cards": [{
+    "id": "time-series-card",
+    "title": "time series card",
+    "slug": "time-series-card",
+    "attributes": {},
+    "createTimeStamp": "2016-01-20T00:52:05.901Z",
+    "tags": []
+  }]
+}
