@@ -1,7 +1,7 @@
 #Predix Experience Seed
 Dashboard Seed is an application that uses Px Web Components and <a href="https://github.com/PredixDev/px-library-design/" target="_blank">Px UI Elements</a> inside an Angular application.
 
-[![Image of Yaktocat](https://octodex.github.com/images/yaktocat.png)](https://predixdev.github.io/predix-ui/)[newtab]
+[![Image of Yaktocat](https://octodex.github.com/images/yaktocat.png)](https://predixdev.github.io/predix-ui/ target="_blank")
 
 ## To Run the Dashboard Seed
 
